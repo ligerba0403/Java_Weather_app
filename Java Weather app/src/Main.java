@@ -1,27 +1,39 @@
 import java.io.IOException;
+import java.util.Scanner;
+import java.text.DecimalFormat;
 
 public class Main {
 
     public static void main(String[] args) throws IOException, InterruptedException {
          
-        WeatherApiClient api = new WeatherApiClient();
-        WeatherData data = new WeatherData(api.getWeatherData(41.0082, 28.9784));
-        
-        System.out.println(data.getCityName()); 
-        System.out.println(data.getTemp()); 
-        System.out.println(data.getWindSpeed());
-        
-        // City verisini almak için CityApiClient'ı kullanıyoruz
-        CityApiClient cityApiClient = new CityApiClient();
-        
-        // London şehri verilerini al
-        String cityData = cityApiClient.getCityData("London").toString(); 
-        
-        // City nesnesini oluştur
-        City city = new City(cityData);
+    	System.out.println("Welcome to Application");
+    	System.out.println("Created by ligerba");
+    	System.out.println("*********************************************************");
+    	Scanner scanner = new Scanner(System.in);
+    	
+    	while(true) {
+    			System.out.println("Enter Country Name : ");
+    			String cityName = scanner.next();
+    		 	CityApiClient cityApiClient = new CityApiClient();
+    	        String cityData = cityApiClient.getCityData(cityName).toString(); 
+    	        
 
-        // Latitude ve Longitude bilgilerini yazdır
-        System.out.println(city.getLat()); 
-        System.out.println(city.getLon());
+    	        City city = new City(cityData);
+
+    	        DecimalFormat df = new DecimalFormat("#.##");
+    	        
+    	        WeatherApiClient api = new WeatherApiClient();
+    	        WeatherData data = new WeatherData(api.getWeatherData(city.getLat(),city.getLon()));
+    	        
+    	        System.out.println(data.getCityName()); 
+    	        System.out.println("Temperature : "+df.format(data.getTemp())); 
+    	        System.out.println("Wind Speed : " +df.format(data.getWindSpeed()));
+    	        
+    	       
+    	}
+       
+        
+
+       
     }
 }
