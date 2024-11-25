@@ -3,24 +3,25 @@ import com.google.gson.*;
 
 public class WeatherData {
 	private String cityName ;
-	private double lat;
-	private double lon;
+
 	
 	private double temp;
-	private float feelsTemp;
-	private float minTemp;
-	private float maxTemp;
+	private double  feelsTemp;
+	private double minTemp;
+	private double maxTemp;
 	
-	private float windSpeed;
+	private double windSpeed;
 	
 	public WeatherData(String jsonResponse) {
-        // JSON yanıtını parse et
+    
         JsonObject json = JsonParser.parseString(jsonResponse).getAsJsonObject();
 
-        // Değerleri ayıkla
+        
         this.cityName = json.get("name").getAsString();
-        this.temp = json.getAsJsonObject("main").get("temp").getAsDouble();
-      
+        this.temp = json.getAsJsonObject("main").get("temp").getAsDouble() -273.15;
+        this.windSpeed = json.getAsJsonObject("wind").get("speed").getAsDouble();
+        
+        
     }
 
 	public String getCityName() {
@@ -31,62 +32,47 @@ public class WeatherData {
 		this.cityName = cityName;
 	}
 
-	public double getLon() {
-		return lon;
-	}
-
-	public void setLon(double lot) {
-		this.lon = lot;
-	}
-
-	public double getLat() {
-		return lat;
-	}
-
-	public void setLat(double lat) {
-		this.lat = lat;
-	}
-
 	public double getTemp() {
 		return temp;
 	}
 
-	public void setTemp(float temp) {
+	public void setTemp(double temp) {
 		this.temp = temp;
 	}
 
-	public float getFeelsTemp() {
+	public double getFeelsTemp() {
 		return feelsTemp;
 	}
 
-	public void setFeelsTemp(float feelsTemp) {
+	public void setFeelsTemp(double feelsTemp) {
 		this.feelsTemp = feelsTemp;
 	}
 
-	public float getMinTemp() {
+	public double getMinTemp() {
 		return minTemp;
 	}
 
-	public void setMinTemp(float minTemp) {
+	public void setMinTemp(double minTemp) {
 		this.minTemp = minTemp;
 	}
 
-	public float getMaxTemp() {
+	public double getMaxTemp() {
 		return maxTemp;
 	}
 
-	public void setMaxTemp(float maxTemp) {
+	public void setMaxTemp(double maxTemp) {
 		this.maxTemp = maxTemp;
 	}
 
-	public float getWindSpeed() {
+	public double getWindSpeed() {
 		return windSpeed;
 	}
 
-	public void setWindSpeed(float windSpeed) {
+	public void setWindSpeed(double windSpeed) {
 		this.windSpeed = windSpeed;
 	}
-	
+
+
 	
 
 }
