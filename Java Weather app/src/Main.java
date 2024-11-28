@@ -8,7 +8,7 @@ public class Main {
          
     	System.out.println("Welcome to Application");
     	System.out.println("Created by ligerba");
-    	System.out.println("*********************************************************");
+    	System.out.println("*******************k**************************************");
     	Scanner scanner = new Scanner(System.in);
     	
     	while(true) {
